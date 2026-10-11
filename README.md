@@ -18,8 +18,6 @@ A full-stack shopping application with a React/Vite client and an Express/MongoD
 
 ## Deploy
 
-Deploy the API as a Node web service with repository root as its working directory, build command `npm install`, and start command `npm start`. Set these server environment variables in the hosting provider: `dbUrl`, `JWT_SECRET`, `FRONTEND_URL`, `RAZORPAY_KEY_ID`, and `RAZORPAY_KEY_SECRET`.
-
-Deploy the client as a static Vite site with root directory `Client/vite-project`, build command `npm install && npm run build`, and output directory `dist`. Set `VITE_API_BASE_URL` to the deployed API's HTTPS origin. Configure the API's `FRONTEND_URL` to the deployed client origin so credentialed requests can pass CORS.
+The included `render.yaml` deploys the API and built client together as a single Render web service. In Render, create a Blueprint from this repository and provide the prompted `dbUrl`, `JWT_SECRET`, `RAZORPAY_KEY_ID`, and `RAZORPAY_KEY_SECRET` values. The client is built with a same-origin API URL, and Express serves the built client alongside the API.
 
 Do not commit `.env` files or put secret values in frontend variables. Vite variables are included in the public client bundle; only the Razorpay public key ID belongs in browser code, while the key secret stays on the API.

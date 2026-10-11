@@ -39,6 +39,18 @@ app.use("/wishlist", wishlistRoutes);
 app.use("/cart", cartRoutes);
 app.use("/orders", orderRoutes);
 
+// Serve the production client from the same origin as the API. Keeping both
+// parts on one origin lets the HttpOnly login cookie work without third-party
+// cookie settings in the browser.
+const clientBuildPath = join(__dirname, "../Client/vite-project/dist");
+app.use(express.static(clientBuildPath));
+app.use((req, res, next) => {
+  if (req.method === "GET" && req.accepts("html")) {
+    return res.sendFile(join(clientBuildPath, "index.html"));
+  }
+  next();
+});
+
 mongoose.connect(process.env.dbUrl)
   .then(() => console.log("DB Connected"))
   .catch((err) => console.log(err));

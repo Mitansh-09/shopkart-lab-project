@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: shopkart-lab-project
+    runtime: node
+    plan: free
+    buildCommand: npm ci && cd Client/vite-project && npm ci && VITE_API_BASE_URL=/ npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: dbUrl
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
