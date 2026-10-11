@@ -5,7 +5,7 @@ import axios from "axios";
 // never sent back on later requests (like /customers/me), so the server
 // would treat every request as logged out.
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL || "/api",
   withCredentials: true,
 });
 

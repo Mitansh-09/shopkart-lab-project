@@ -18,6 +18,6 @@ A full-stack shopping application with a React/Vite client and an Express/MongoD
 
 ## Deploy
 
-The included `render.yaml` deploys the API and built client together as a single Render web service. In Render, create a Blueprint from this repository and provide the prompted `dbUrl`, `JWT_SECRET`, `RAZORPAY_KEY_ID`, and `RAZORPAY_KEY_SECRET` values. The client is built with a same-origin API URL, and Express serves the built client alongside the API.
+Deploy two Vercel projects from this repository: the API project uses the repository root, and the client project uses `Client/vite-project` as its root directory. Configure the API project with `dbUrl`, `JWT_SECRET`, `RAZORPAY_KEY_ID`, and `RAZORPAY_KEY_SECRET`. Configure the client with `VITE_API_BASE_URL=/api` and a rewrite from `/api/:path*` to the API project's deployed `/api/:path*` URL. The client project's `vercel.json` includes the SPA fallback for React Router routes.
 
 Do not commit `.env` files or put secret values in frontend variables. Vite variables are included in the public client bundle; only the Razorpay public key ID belongs in browser code, while the key secret stays on the API.
